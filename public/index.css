@@ -1,0 +1,126 @@
+
+/* ---- Reset Defaults ---- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Defaults ---- */
+body {
+  /* Photo by Pixabay */
+  background-image: url('./pexels-pixabay-531880.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  line-height: 1.5;
+  min-height: 100svh;
+  --headerHeight: 8vh;
+  --bodyHeight: calc(100svh - var(--headerHeight));
+}
+
+/* ---- Header ---- */
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: var(--headerHeight);
+  border-bottom: 2px ridge rgb(0, 0, 0);
+  backdrop-filter: blur(15px);
+}
+header a {
+  margin: 1rem;
+  font-size: 1.25rem;
+  text-underline-offset: 2px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+header a:hover,
+header a:focus {
+  color: black;
+  text-decoration: underline;
+}
+
+.icon_home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+  filter: invert(1);
+}
+.icon_home:hover,
+.icon_home:focus {
+  filter: invert(0);
+}
+
+/* ---- Main ---- */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: var(--bodyHeight);
+}
+main > h2 {
+  font-size: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+/* ---- Login ---- */
+.form_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  margin: 1rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 60%;
+  max-width: 60%;
+}
+.form_container input {
+  margin-bottom: 1rem;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: none;
+  width: 100%;
+}
+.form_container label {
+  align-self: flex-start;
+}
+.form_container button {
+  border: none;
+  border-radius: 0.5em;
+  background-color: greenyellow;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 1px solid greenyellow;
+  transition: 400ms ease;
+}
+.form_container button:hover,
+.form_container button:focus {
+  cursor: pointer;
+  color: greenyellow;
+  background-color: black;
+  border: 1px solid greenyellow;
+}
+.form_container > p {
+  text-align: center;
+  text-wrap: wrap;
+  text-wrap: balance;
+  text-transform: uppercase;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid gray;
+}
+
+
+
+
