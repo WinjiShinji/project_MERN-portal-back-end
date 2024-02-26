@@ -16,7 +16,7 @@ const authorizedJWT = (req, res, next) => {
     process.env.ACCESS_TOKEN_SECRET,
     (err, decoded) => {
       if (err) return res.status(403).json({ message: 'authToken does not match!'})
-      req.user = decoded.UserInfo.username
+      req._id = decoded.UserInfo._id
       req.roles = decoded.UserInfo.roles
       next()
     }

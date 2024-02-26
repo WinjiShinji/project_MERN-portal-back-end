@@ -25,16 +25,17 @@ const userLogin = async (req, res) => {
     try {
       // Update Login Date //
       const date = new Date()
-      const newDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getMilliseconds()}`
+      const newTime = `${date.getHours()}:${date.getMinutes()}:${date.getMilliseconds()}`
+      const newDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
       validUser.loginOldDate = validUser.loginNewDate || 'New user!'
-      validUser.loginNewDate = newDate.slice(0,-1)
+      validUser.loginNewDate = `${newTime.slice(0, -1)} ${newDate}`
       // @TODO: time string to hhmmss format
 
       // Create jwt access token //
       const accessToken = jwt.sign({
         // Payload //
         "UserInfo": {
-          "username": validUser.username,
+          "_id": validUser._id,
           "roles": validUser.roles
         },
       }, 
@@ -45,7 +46,7 @@ const userLogin = async (req, res) => {
       // Create jwt refresh token //
       const refreshToken = jwt.sign({
         // Payload //
-        "username": validUser.username
+        "_id": validUser._id
       },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: "1d"}

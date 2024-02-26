@@ -2,16 +2,16 @@ const User = require('../models/userSchema')
 const bcrypt = require('bcrypt')
 
 const userPassChange = async (req, res) => {
-  if (!req?.body?.username || !req?.body?.oldPass ||!req?.body?.newPass) {
+  if (!req?.body?._id || !req?.body?.oldPass ||!req?.body?.newPass) {
     return res.status(401).json({ message: 'All fields required!' })
   }
 
-  const username = req?.body?.username
+  const _id = req?.body?._id
   const oldPass = req?.body?.oldPass
   const newPass = req?.body?.newPass
 
   // Check valid user //
-  const validUser = await User.findOne({ username: username }).exec()
+  const validUser = await User.findById({ _id }).exec()
   if (!validUser) {
     return res.status(401).json({ message: 'Not a valid User!' })
   }

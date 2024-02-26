@@ -12,7 +12,7 @@ const userRefresh = async (req, res) => {
   // Find user with matching refresh token //
   const userExists = await User.findOne({ refreshToken }).exec()
   if (!userExists) {
-    return res.sendStatus(403)
+    return res.status(403).json({ message: 'No user exists!' })
   }
 
   try {
@@ -23,10 +23,10 @@ const userRefresh = async (req, res) => {
       (err, decoded) => {
         // Verified //
         if (err) {
-          return res.sendStatus(403)
+          return res.status(403).json({ message: 'Invalid Token!' })
         }
-        if (userExists.username !== decoded.username) {
-          return res.sendStatus(403)
+        if (userExists._id.toString() !== decoded._id) {
+          return res.status(403).json({ message: '_id invalid' })
         }
 
         // Create access token //
@@ -34,7 +34,7 @@ const userRefresh = async (req, res) => {
           {
           // Payload //
           "UserInfo": {
-            "username": decoded.username,
+            "_id": decoded._id,
             "roles": userExists.roles
             }
           },

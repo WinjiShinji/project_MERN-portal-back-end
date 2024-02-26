@@ -6,13 +6,11 @@ const userRegister = async (req, res) => {
   if (!req?.body?.username || !req?.body?.password) {
     return res.status(400).json({ message: 'Username & Password are required!'})
   }
- 
-  // Validation //
   const username = req?.body?.username
   const password = req?.body?.password
   
   // Test Strings //
-  const usernameRegEx = new RegExp(/^([\w@#-_=+!£$%^&*]{8,255})$/) 
+  const usernameRegEx = new RegExp(/^([\w@#-_=+!£$%^&*]{8,255})$/)
   const passwordRegEx = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])([\w@#-_=+!£$%^&*]{8,255})$/)
   const usernameValid = usernameRegEx.test(username.toString())
   const passwordValid = passwordRegEx.test(password.toString())

@@ -5,8 +5,7 @@ const ROLES = require('../config/roles')
 const authorizedRoles = require('../middleware/authorizedRoles')
 
 // ----  Protected User Routes ---- //
-
-// Account //
+// User Account Data //
 router.get('/account', authorizedRoles(ROLES.User), async (req, res) => {
   // Check for jwt cookie //
   const cookies = req?.cookies
@@ -27,11 +26,17 @@ router.get('/account', authorizedRoles(ROLES.User), async (req, res) => {
 
 // Password Change //
 router.post('/passwordChange', authorizedRoles(ROLES.User), require('../controllers/userPassChange'))
-// UserInfo Update //
 
+// Username Change //
+router.post('/usernameChange', authorizedRoles(ROLES.User), require('../controllers/userChangeUsername'))
+
+// Delete User Account //
+router.post('/accountDelete', authorizedRoles(ROLES.User), require('../controllers/userDelete'))
 
 // ---- Protected Admin Routes ---- //
-// @TODO: create admin routes
+router.get('/admin', authorizedRoles(ROLES.Admin), require('../controllers/adminController').getUser)
 
+
+router.delete('/admin', authorizedRoles(ROLES.Admin), require('../controllers/adminController').deleteUser)
 
 module.exports = router
