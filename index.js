@@ -13,11 +13,6 @@ const authorizedJWT = require('./middleware/authorizedJWT')
 // PORT //
 const PORT = process.env.PORT || 3500
 
-// Vercel //
-app.get("/", (req, res) => {
-  res.send("Express on Vercel");
-});
-
 // DB Connect //
 connectDB()
 
@@ -35,6 +30,11 @@ app.use(cookieParser())
 
 // Static Files //
 app.use(express.static('public'))
+
+// Vercel //
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
+});
 
 // Routes //
 app.use('/', require('./routes/root'))
