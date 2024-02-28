@@ -9,7 +9,6 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const authorizedJWT = require('./middleware/authorizedJWT')
 
-
 // PORT //
 const PORT = process.env.PORT || 3500
 
@@ -31,18 +30,12 @@ app.use(cookieParser())
 // Static Files //
 app.use(express.static('public'))
 
-// Vercel //
-app.get("/", (req, res) => {
-  res.send("Express on Vercel");
-});
-
 // Routes //
 app.use('/', require('./routes/root'))
 app.use('/register', require('./routes/register'))
 app.use('/login', require('./routes/login'))
 app.use('/logout', require('./routes/logout'))
 app.use('/refresh', require('./routes/refresh'))
-
 
 // Protected Routes //
 app.use(authorizedJWT)

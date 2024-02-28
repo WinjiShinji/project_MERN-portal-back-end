@@ -3,6 +3,4 @@ const allowedList = [
   'https://localhost:3000',
 ]
 
-// @DEV: test URIs
-
 module.exports = allowedList
