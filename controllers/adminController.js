@@ -58,8 +58,55 @@ const getUser = async (req, res) => {
   }
 }
 
-// UPDATE User Info //
+// UPDATE User Roles //
+const userRoleAdmin = async (req, res) => {
+  if (!req?.body?._id) {
+    return res.status(401).json({ message: '_id params is empty!' })
+  }
+  const userId = req?.body?._id.toString()
+  const adminId = req?._id.toString() || ''
 
+  // Check _id is valid //
+  try {
+    const regEx = new RegExp(/^([0-9a-f]{24})$/) // hex string check
+    const validId = regEx.test(userId)
+    const validAdminId = regEx.test(adminId)
+
+    if (!validId) {
+      return res.status(403).json({ message: `User _id: ${userId} is not valid!` })
+    }
+    if (!validAdminId) {
+      return res.status(403).json({ message: `Admin _id: ${adminId} is not valid!` })
+    }
+    if (userId === adminId) {
+      return res.status(409).json({ message: 'UserID matches AdminID, conflict!' })
+    }
+
+    // Check user exists //
+    const validUser = await User.findById({ _id: userId }).exec()
+    if (!validUser) {
+      return res.status(403).json({ message: `UserID: ${userId} is not a in DB!` })
+    }
+    if (validUser) {
+      // Check existing roles //
+      const userRoles = validUser.roles || { User: 5000 }
+      if (userRoles.Admin) {
+        validUser.roles = { User: 5000 }
+        await validUser.save()
+        return res.status(201).json({ message: 'Admin Role Removed' })
+      } else {
+        validUser.roles.Admin = 5400
+        await validUser.save()
+        return res.status(201).json({ message: 'Admin Role Added' })
+      }
+    } else {
+      return res.sendStatus(500)
+    }
+  } catch (err) {
+    console.log(err)
+  }
+
+}
 
 // DELETE User Account //
 const deleteUser = async (req, res) => {
@@ -67,7 +114,7 @@ const deleteUser = async (req, res) => {
     return res.status(401).json({ message: '_id params missing!' })
   }
   const userId = req?.query?._id.toString()
-  const adminId = req?._id.toString()
+  const adminId = req?._id.toString() || ''
 
   try {
     // Check _id is valid //
@@ -104,6 +151,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = { 
   getUser,
+  userRoleAdmin,
   deleteUser
 
 }

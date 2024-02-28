@@ -60,7 +60,7 @@
 <br></br>
 
 # Admin Endpoints
-## GET - /admin
+## GET (User Data) - /admin
 ### Request:
   - params._id: String || params.username: String
 
@@ -72,12 +72,15 @@
 
 ### Response:
 
-## UPDATE - /admin
+## PUT (Admin Roles) - /admin
 ### Request:
+  - _id: String (admin)
+  - params._id: String (user)
 
 ### Response:
+  - json.message
 
-## DELETE - /admin
+## DELETE (User Acc) - /admin
 ### Request:
   - _id: String (admin)
   - params._id: String (user)

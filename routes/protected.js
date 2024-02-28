@@ -35,8 +35,7 @@ router.post('/accountDelete', authorizedRoles(ROLES.User), require('../controlle
 
 // ---- Protected Admin Routes ---- //
 router.get('/admin', authorizedRoles(ROLES.Admin), require('../controllers/adminController').getUser)
-
-
+router.put('/admin', authorizedRoles(ROLES.Admin), require('../controllers/adminController').userRoleAdmin)
 router.delete('/admin', authorizedRoles(ROLES.Admin), require('../controllers/adminController').deleteUser)
 
 module.exports = router
