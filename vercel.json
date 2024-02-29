@@ -2,16 +2,8 @@
   "version": 2,
   "rewrites": [
     { 
-      "source": "/(.*)", 
-      "destination": "/api",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      }
-    },
-    { 
-      "source": "/login", 
-      "destination": "/api/login",
+      "source": "/", 
+      "destination": "./api/index.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "*"
