@@ -3,7 +3,7 @@
   "rewrites": [
     { 
       "source": "/", 
-      "destination": "./api/index.js",
+      "destination": "./index.js",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "http://localhost:3000"
