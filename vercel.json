@@ -5,8 +5,8 @@
   ],
   "rewrites": [
     { 
-      "source": "/login", 
-      "destination": "./api/index.js",
+      "source": "/api/:path*",
+      "destination": "https://localhost:3000/:path*",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "*"
