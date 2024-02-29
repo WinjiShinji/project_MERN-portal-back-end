@@ -22,8 +22,7 @@ connectDB()
 app.use(express.json())
 
 // CORS //
-// app.use(cors(corsOptions))
-app.use(cors())
+app.use(cors(corsOptions))
 
 // Cookies Parser //
 app.use(cookieParser())
