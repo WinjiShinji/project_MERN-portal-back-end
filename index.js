@@ -41,18 +41,6 @@ app.use('/refresh', require('./routes/refresh'))
 app.use(authorizedJWT)
 app.use('/', require('./routes/protected'))
 
-// Error - 404 //
-app.all('*', (req, res) => {
-  res.status(404)
-  if (req.accepts('html')) {
-    res.sendFile(path.join(__dirname, 'views', '404Error.html'))
-  } else if (req.accepts('json')) {
-    res.json({ error: "404 Not Found"})
-  } else {
-    res.type('txt').send("404 Not Found")
-  }
-})
-
 // Database Connection Check //
 mongoose.connection.once('open', () => {
   console.log('Connected To Database')
