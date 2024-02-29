@@ -5,7 +5,7 @@
   ],
   "rewrites": [
     { 
-      "source": "/api/:path*",
+      "source": "/:path*",
       "destination": "https://localhost:3000/:path*",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
