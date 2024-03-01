@@ -23,6 +23,7 @@ app.use(express.json())
 
 // CORS //
 app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 
 // Cookies Parser //
 app.use(cookieParser())
