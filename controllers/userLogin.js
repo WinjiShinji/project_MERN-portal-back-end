@@ -63,7 +63,7 @@ const userLogin = async (req, res) => {
         secure: true,      // @FIX: HttpCookie
         maxAge: 24 * 60 * 60 * 1000
       })
-      res.json({ accessToken })
+      res.status(200).json({ accessToken })
 
     } catch (error) {
       console.error(error)
