@@ -4,8 +4,7 @@
     { "src": "*.js", "use": "@vercel/node"}
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/(.*)"},
-    { "source": "/login", "methods": "POST", "destination": "/api/login"}
+    { "source": "/(.*)", "destination": "/api/(.*)"}
   ],
   "headers": [
     {
