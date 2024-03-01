@@ -23,6 +23,7 @@ app.use(express.json())
 
 // CORS //
 app.use(cors(corsOptions))
+app.options('/login', cors()) // enable pre-flight requests
 
 // Cookies Parser //
 app.use(cookieParser())
