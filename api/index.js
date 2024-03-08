@@ -1,3 +1,53 @@
-const app = require('../index')
+require('dotenv').config()
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
+const mongoose = require('mongoose')
+const connectDB = require('./config/connectDB')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const authorizedJWT = require('./middleware/authorizedJWT')
 
+// PORT //
+const PORT = process.env.PORT || 3500
+
+// DB Connect //
+connectDB()
+
+// Event Logging //
+// @TODO: event logging handle
+
+// JSON //
+app.use(express.json())
+
+// CORS //
+app.use(cors(corsOptions))
+app.options('*', cors()) // enable pre-flight requests
+
+// Cookies Parser //
+app.use(cookieParser())
+
+// Static Files //
+app.use(express.static('public'))
+
+// Routes //
+app.use('/', require('./routes/root'))
+app.use('/register', require('./routes/register'))
+app.use('/login', require('./routes/login'))
+app.use('/logout', require('./routes/logout'))
+app.use('/refresh', require('./routes/refresh'))
+
+// Protected Routes //
+app.use(authorizedJWT)
+app.use('/', require('./routes/protected'))
+
+// Database Connection Check //
+mongoose.connection.once('open', () => {
+  console.log('Connected To Database')
+})
+
+app.listen(PORT, () => {console.log(`Server running on port ${PORT}`)})
+
+// Vercel //
 module.exports = app
