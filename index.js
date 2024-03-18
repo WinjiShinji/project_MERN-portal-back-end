@@ -2,12 +2,12 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const corsOptions = require('./config/corsOptions')
+const corsOptions = require('./src/config/corsOptions')
 const mongoose = require('mongoose')
-const connectDB = require('./config/connectDB')
+const connectDB = require('./src/config/connectDB')
 const path = require('path')
 const cookieParser = require('cookie-parser')
-const authorizedJWT = require('./middleware/authorizedJWT')
+const authorizedJWT = require('./src/middleware/authorizedJWT')
 
 // PORT //
 const PORT = process.env.PORT || 3500
@@ -32,15 +32,15 @@ app.use(cookieParser())
 app.use(express.static('public'))
 
 // Routes //
-app.use('/', require('./routes/root'))
-app.use('/register', require('./routes/register'))
-app.use('/login', require('./routes/login'))
-app.use('/logout', require('./routes/logout'))
-app.use('/refresh', require('./routes/refresh'))
+app.use('/', require('./src/routes/root'))
+app.use('/register', require('./src/routes/register'))
+app.use('/login', require('./src/routes/login'))
+app.use('/logout', require('./src/routes/logout'))
+app.use('/refresh', require('./src/routes/refresh'))
 
 // Protected Routes //
 app.use(authorizedJWT)
-app.use('/', require('./routes/protected'))
+app.use('/', require('./src/routes/protected'))
 
 // Database Connection Check //
 mongoose.connection.once('open', () => {
