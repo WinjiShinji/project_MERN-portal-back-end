@@ -34,7 +34,7 @@ const userChangeUsername = async (req, res) => {
     userExists.save()
     return res.status(200).json({ message: 'Username Updated!' })
   } catch (err) {
-    console.error(err)
+    serverLogging("Save new username", "userChangeUsername.js", 500)
     return res.status(500).json({ message: err})
   }
 }

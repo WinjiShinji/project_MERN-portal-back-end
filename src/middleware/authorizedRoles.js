@@ -1,3 +1,4 @@
+const serverLogging = require('../logging/serverLogging')
 const User = require('../models/userSchema')
 
 const authorizedRoles = (...allowedRoles) => {
@@ -13,7 +14,8 @@ const authorizedRoles = (...allowedRoles) => {
       if (!userExists) return res.status(401).json({ message: `_id ${_id} does not exist in DB!`})
       if (!userExists.roles === roles) return res.status(401).json({ message: `_id ${_id} roles do not match DB!`})
     } catch (error) {
-      console.error(error)
+      serverLogging("Verify user roles info", "authorizedRoles.js", 500)
+      return res.sendStatus(500)
     }
 
     // Compare Role Permissions //
@@ -23,7 +25,7 @@ const authorizedRoles = (...allowedRoles) => {
       ))
       if (!validRoles) return res.status(403).json({ message: 'Forbidden: You do not have sufficient permission!'})
     } catch (error) {
-      console.error(error)
+      serverLogging("Compare Role Permissions", "authorizedRoles.js", 500)
     }
     
     next()

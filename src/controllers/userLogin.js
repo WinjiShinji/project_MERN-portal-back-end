@@ -1,6 +1,7 @@
 const User = require('../models/userSchema')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const serverLogging = require('../logging/serverLogging')
 
 const userLogin = async (req, res) => {
   if (!req?.body?.username || !req?.body?.password) {
@@ -66,7 +67,8 @@ const userLogin = async (req, res) => {
       res.status(200).json({ accessToken })
 
     } catch (error) {
-      console.error(error)
+      serverLogging("JWT Create Tokens","userLogin.js", 500)
+      return res.sendStatus(500)
     }
   } else {
     return res.sendStatus(401)

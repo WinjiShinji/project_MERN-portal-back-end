@@ -47,7 +47,8 @@ const userRefresh = async (req, res) => {
       }
     )
   } catch (error) {
-    console.error(error)
+    serverLogging("Create Tokens", "userRefresh.js", 500)
+    return res.sendStatus(500)
   }
 }
 

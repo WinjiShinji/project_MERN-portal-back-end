@@ -5,7 +5,6 @@ const cors = require('cors')
 const corsOptions = require('./src/config/corsOptions')
 const mongoose = require('mongoose')
 const connectDB = require('./src/config/connectDB')
-const path = require('path')
 const cookieParser = require('cookie-parser')
 const authorizedJWT = require('./src/middleware/authorizedJWT')
 
@@ -14,9 +13,6 @@ const PORT = process.env.PORT || 3500
 
 // DB Connect //
 connectDB()
-
-// Event Logging //
-// @TODO: event logging handle
 
 // JSON //
 app.use(express.json())
@@ -48,6 +44,3 @@ mongoose.connection.once('open', () => {
 })
 
 app.listen(PORT, () => {console.log(`Server running on port ${PORT}`)})
-
-// Vercel //
-module.exports = app

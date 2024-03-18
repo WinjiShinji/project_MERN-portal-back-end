@@ -32,6 +32,7 @@ const userDelete = async (req, res) => {
       console.error(err)
     }
   } else {
+    serverLogging("Delete Id account", "userDelete.js", 500)
     return res.sendStatus(500)
   }
 }

@@ -42,6 +42,7 @@ const userPassChange = async (req, res) => {
     // Send success message to front-end //
     return res.status(200).json({ message: 'Password update success!'})
   } catch (error) {
+    serverLogging("Change passwords", "userPassChange.js", 500)
     return res.status(500).json({ message: error.message })
   }
 }

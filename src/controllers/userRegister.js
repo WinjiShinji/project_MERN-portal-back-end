@@ -38,7 +38,8 @@ const userRegister = async (req, res) => {
 
     res.status(201).json({ message: `"${username}" was created successfully!`})
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    serverLogging("Register User", "userRegister.js", 500)
+    return res.status(500).json({ message: error.message })
   }
 }
 

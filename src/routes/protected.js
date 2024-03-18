@@ -24,12 +24,11 @@ router.get('/account', authorizedRoles(ROLES.User), async (req, res) => {
   }
 })
 
+// ---- Admin Controls ---- //
 // Password Change //
 router.post('/passwordChange', authorizedRoles(ROLES.User), require('../controllers/userPassChange'))
-
 // Username Change //
 router.post('/usernameChange', authorizedRoles(ROLES.User), require('../controllers/userChangeUsername'))
-
 // Delete User Account //
 router.post('/accountDelete', authorizedRoles(ROLES.User), require('../controllers/userDelete'))
 

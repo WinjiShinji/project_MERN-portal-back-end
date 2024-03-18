@@ -1,3 +1,4 @@
+const serverLogging = require('../logging/serverLogging')
 const User = require('../models/userSchema')
 
 // GET User Data //
@@ -33,7 +34,8 @@ const getUser = async (req, res) => {
         return res.sendStatus(500)
       }
     } catch (err) {
-      console.log(err)
+      serverLogging("Get user by id", "adminController.js", 500)
+      return res.sendStatus(500)
     }
   }
 
@@ -53,7 +55,8 @@ const getUser = async (req, res) => {
         return res.sendStatus(500)
       }
     } catch (err) {
-      console.log(err)
+      serverLogging("Get user by username", "adminController.js", 500)
+      return res.sendStatus(500)
     }
   }
 }
@@ -103,7 +106,8 @@ const userRoleAdmin = async (req, res) => {
       return res.sendStatus(500)
     }
   } catch (err) {
-    console.log(err)
+    serverLogging("Update user roles", "adminController.js", 500)
+    return res.sendStatus(500)
   }
 
 }
@@ -145,7 +149,8 @@ const deleteUser = async (req, res) => {
       return res.sendStatus(500)
     }
   } catch (err) {
-    console.log(err)
+    serverLogging("Delete User", "adminController.js", 500)
+    return res.sendStatus(500)
   }
 }
 

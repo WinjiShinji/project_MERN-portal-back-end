@@ -3,7 +3,7 @@ const User = require('../models/userSchema')
 const userLogout = async (req, res) => {
   const cookies = req?.cookies
   // Check for jwt cookie //
-  if (!cookies?.jwt) return res.status(204).json({ message: 'No content!'})
+  if (!cookies?.jwt) return res.status(204).json({ message: 'No jwt content!'})
   const refreshToken = cookies.jwt
   
   // Check user exists //
@@ -30,7 +30,8 @@ const userLogout = async (req, res) => {
     res.status(200).json({ message: 'Logged out successfully'})
 
   } catch (error) {
-    console.error(error)
+    serverLogging("Clear & delete cookies", "userLogout.js", 500)
+    return res.sendStatus(500)
   }
 }
 
